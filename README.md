@@ -8,7 +8,6 @@
 - API: https://api.nikosfraudapp.com
 - Frontend: https://nikosfraudapp.com
 
----
 
 ## Overview
 
@@ -20,28 +19,7 @@ This project demonstrates an end-to-end machine learning deployment:
 - Security: API key header, IAM least-privilege roles, security groups.
 - Ops: CloudWatch logs and AWS Budgets alerts.
 
----
 
-## Architecture
-
-```mermaid
-flowchart LR
-    subgraph CloudFront
-      CF[CloudFront (ACM cert)] --> S3Site[(S3 Static Website Bucket)]
-    end
-
-    subgraph VPC
-      ALB[Application Load Balancer (HTTPS)] --> TG[(Target Group)]
-      TG --> ECS[Amazon ECS Fargate Task (FastAPI)]
-    end
-
-    S3Artifacts[(S3 Artifacts Bucket: model.pkl, threshold.json)] --> ECS
-
-    Browser -->|GET| CF
-    Browser -->|POST /score + X-API-Key| ALB
-```
-
----
 
 ## Repository Structure
 
